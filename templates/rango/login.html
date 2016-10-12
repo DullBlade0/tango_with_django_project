@@ -1,0 +1,29 @@
+{% extends 'rango/base_bootstrap.html.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Login
+{% endblock %}
+
+{% block body_block %}
+<link href="http://v4-alpha.getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+    <div class="jumbotron">
+        <h1 class="display-3">Login</h1>
+    </div>
+
+<form class="form-signin" role="form" method="post" action=".">
+    {% csrf_token %}
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input type="text"
+</form>
+<form id="login_form" method="post" action="{% url 'rango:login' %}">
+<!-- Remember to create my own form -->
+    {% csrf_token %}
+    Username: <input type="text" name="username" value="" size="50" />
+    <br />
+    Password: <input type="password" name="password" value="" size="50" />
+    <br />
+    <input type="submit" value="submit" />
+</form>
+{% endblock %}

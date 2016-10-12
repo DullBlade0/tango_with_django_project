@@ -1,0 +1,10 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Login
+{% endblock %}
+
+{% block body_block %}
+    <p>This is a a restricted view: <strong>{{ user.username }}</strong></p>
+{% endblock %}

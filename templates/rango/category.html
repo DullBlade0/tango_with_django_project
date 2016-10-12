@@ -1,0 +1,64 @@
+{% extends 'rango/base_bootstrap.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {{ category.name }}
+{% endblock %}
+
+{% block body_block %}
+
+
+
+    {% if user.is_authenticated %}
+    <h1>Search with Rango</h1>
+        <br />
+        <form class="form-inline" id="user_form" method="post" action="{% url 'rango:show_category' category.slug %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" type="text" size="50" name="query" value="" id="query" />
+            </div>
+            <button class="btn btn-primary" type="submit" name="submit" value="Search">Search</button>
+        </form>
+    {% endif %}
+
+
+
+    {% if user.is_authenticated %}
+        <button class="btn btn-primary btn-sm" id="likes" data-catid="{{ category.id }}"> Like </button>
+        <div id="like_count">{{ category.likes }}</div>
+    {% endif %}
+
+
+    <div>
+        {% if result_list %}
+          <h3>Results</h3>
+          <div class="list-group">
+            {% for result in result_list %}
+                <div class="list-group-item">
+                    <h4 class="list-group-item-heading">
+                        <a href="{{ result.link }}">{{ result.title }}</a>
+                    </h4>
+                    <p class="list-group-item-text">{{ result.summary }}</p>
+                </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+    </div>
+    {% if category %}
+        <h1>{{ category.name }}</h1>
+        {% if pages %}
+            <ul>
+                {% for page in pages %}
+                    <li><a href="{% url 'rango:goto' %}?page_id={{ page.id }}"> {{ page.title }} </a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>No pages currently in category</strong>
+        {% endif %}
+    {% else %}
+        The specified category does not exist!
+    {% endif %}
+    {% if category %}
+        <a href="{% url 'rango:add_page' category.slug %}">Add Page</a>
+    {% endif %}
+{% endblock %}

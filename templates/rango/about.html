@@ -1,0 +1,23 @@
+{% extends 'rango/base_bootstrap.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    About
+{% endblock %}
+
+{% block body_block %}
+    <p>You've visited this site: {{ visits }}  time{% if visits > 1 %}s{% endif %}</p>
+    <p>Your last visit was on: {{ last_visit }}</p>
+    <img src="{% static 'images/rango.jpg' %}" alt="Picture of Rango" />
+    {{ about_site }}
+    <button class="btn btn-primary" onclick="alert('You clicked the button using JS');">
+    Click me - I run Javascript
+    </button>
+    <button class="btn btn-primary" id="about-btn">
+        Click Me - I'm JavaScript on Speed
+    </button>
+    <p>This tesxt is for Jquery example.</p>
+    <div id="msg">Hello - I'm here for a JQuery Example too</div>
+    <img src="{{ MEDIA_URL }}catanddog.jpg">
+    <a href="/rango/">Go back to index.</a>
+{% endblock %}
